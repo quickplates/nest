@@ -1,0 +1,35 @@
+---
+# Questions
+
+username:
+  type: str
+  help: Your GitHub username
+
+projectname:
+  type: str
+  help: The name of your project
+
+description:
+  type: str
+  help: A short description of your project
+
+docs:
+  type: bool
+  help: Whether to include a documentation site for your project
+  default: true
+
+docsurl:
+  type: str
+  help: The URL of the documentation site for your project
+  default: "https://{{ username }}.github.io/{{ projectname }}"
+  when: "{{ docs }}"
+
+registry:
+  type: bool
+  help: Whether you want to publish Docker images to a GitHub Container Registry
+  default: true
+
+# Configuration
+
+_subdirectory: src
+_answers_file: .copier-answers.yaml
