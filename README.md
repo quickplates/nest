@@ -34,19 +34,19 @@ copier gh:quickplates/nest .
 - fully reproducible development environments with
   [`Dev Containers`](https://code.visualstudio.com/docs/remote/containers)
   and [`Nix`](https://nixos.org)
-- package management with [`pnpm`](https://pnpm.io)
+- package management with [`npm`](https://www.npmjs.com)
 - embracing [`TypeScript`](https://www.typescriptlang.org) to the fullest
 - optimized custom [`Docker`](https://www.docker.com) images
-- automatic releases on `GitHub Container Registry`
+- automatic releases on [`GitHub Container Registry](https://ghcr.io)
 - running tasks with [`Task`](https://taskfile.dev)
 - formatting and linting with [`Trunk`](https://trunk.io)
 - easy to write and nice looking documentation
   with [`Docusaurus`](https://docusaurus.io)
 - continuous integration with [`GitHub Actions`](https://github.com/features/actions)
 
-## 💻 Contributing and Development
+## 💻 Development
 
-Read more about how to contribute and develop the project
+Read more about how to develop the project
 [here](https://github.com/quickplates/nest/blob/main/CONTRIBUTING.md).
 
 If you have any ideas on how to improve this template,

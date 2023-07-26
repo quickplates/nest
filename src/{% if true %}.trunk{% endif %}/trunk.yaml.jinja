@@ -11,7 +11,7 @@ runtimes:
   enabled:
     # Needed for gitleaks, shfmt, actionlint
     - go@1.19.5
-    # Needed for prettier, markdownlint, svgo, eslint
+    # Needed for prettier, markdownlint{% if docs %}, svgo{% endif %}, eslint
     - node@18.12.1
     # Needed for yamllint
     - python@3.10.8
@@ -21,7 +21,6 @@ lint:
       paths:
         # Ignore copier answers file
         - "**/.copier-answers.yaml"
-        - "**/.copier-answers.yml"
   definitions:
     # Nix formatting check (local)
     - name: nix-fmt-check
@@ -29,12 +28,16 @@ lint:
       run_when: [ci, cli]
       commands:
         - output: pass_fail
+          read_output_from: stderr
           run: >-
             nix
+            --accept-flake-config
             --extra-experimental-features 'nix-command flakes'
+            --no-warn-dirty
             fmt
             --
-            --check path://${target}
+            --check
+            path://${workspace}/${target}
           success_codes: [0, 1]
     # Nix flake check (local)
     - name: nix-flake-check
@@ -42,9 +45,13 @@ lint:
       run_when: [ci, cli]
       commands:
         - output: pass_fail
+          target: .
+          read_output_from: stderr
           run: >-
             nix
+            --accept-flake-config
             --extra-experimental-features 'nix-command flakes'
+            --no-warn-dirty
             flake
             check
             path://${workspace}
@@ -69,9 +76,11 @@ lint:
     - shfmt@3.5.0
     # GitHub Actions linting
     - actionlint@1.6.24
+    {%- if docs %}
     # SVG formatting
     - svgo@3.0.2
-    # JavaScript/TypeScript linting
+    {%- endif %}
+    # JavaScript linting
     - eslint@8.41.0
     # Nix formatting check
     - nix-fmt-check@SYSTEM
