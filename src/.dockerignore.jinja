@@ -1,16 +1,20 @@
+#Task
+/.task
+/Taskfile.yaml
+/Taskfile.yml
+
 # Misc
 .DS_Store
 .todo
 
 # Dependencies
 node_modules
-.pnpm-store
 
 # Build
 /build
 
 # Debug
-pnpm-debug.log*
+npm-debug.log*
 
 # Typescript
 *.tsbuildinfo
@@ -20,11 +24,17 @@ pnpm-debug.log*
 .github
 .trunk
 .vscode
+{%- if docs %}
 docs
+{%- endif %}
 .copier-answers.yaml
 .dockerignore
 .envrc
 .gitattributes
 .gitignore
 CONTRIBUTING.md
+docker-compose.yaml
 Dockerfile
+LICENSE
+README.md
+Taskfile.dist.yaml

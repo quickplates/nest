@@ -5,6 +5,10 @@
 {{ description }}
 
 [![Lint](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/lint.yaml/badge.svg)](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/lint.yaml)
+[![Image](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/image.yaml/badge.svg)](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/image.yaml)
+{%- if registry %}
+[![Registry](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/registry.yaml/badge.svg)](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/registry.yaml)
+{%- endif %}
 {%- if docs %}
 [![Docs](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/docs.yaml/badge.svg)](https://github.com/{{ username }}/{{ projectname }}/actions/workflows/docs.yaml)
 {%- endif %}
@@ -19,8 +23,15 @@ Treat this `README.md` as the landing page for people
 that want to **use** your project.
 
 Write here whatever you want to tell them.
+{%- if docs %}
+
+## 📄 Further Reading
+
+More in-depth documentation can be found
+[here]({{ docsurl }}).
+{%- endif %}
 
 ## 💻 Development
 
-Read more about how to contribute and develop the project
+Read more about how to develop the project
 [here](https://github.com/{{ username }}/{{ projectname }}/blob/main/CONTRIBUTING.md).

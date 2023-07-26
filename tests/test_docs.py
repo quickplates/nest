@@ -14,9 +14,10 @@ def data() -> dict[str, str]:
         "username": "quickplates",
         "projectname": "nest-example",
         "description": "Nest project example 🐈",
-        "repository": "https://github.com/quickplates/nest-example",
+        "envprefix": "NEST_EXAMPLE",
         "docs": "true",
         "docsurl": "https://quickplates.github.io/nest-example",
+        "releases": "false",
         "registry": "false",
     }
 

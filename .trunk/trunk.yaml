@@ -23,11 +23,6 @@ lint:
         - "**/*.jinja"
         # Ignore copier answers file
         - "**/.copier-answers.yaml"
-        - "**/.copier-answers.yml"
-    - linters: [ruff]
-      paths:
-        # Ignore source files
-        - "src/**"
   definitions:
     # Nix formatting check (local)
     - name: nix-fmt-check

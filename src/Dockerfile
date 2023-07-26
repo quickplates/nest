@@ -50,20 +50,20 @@ WORKDIR /build/
 COPY ./scripts/shell.sh ./scripts/shell.sh
 SHELL ["./scripts/shell.sh"]
 
-# Copy root package files
-COPY package.json pnpm-lock.yaml .npmrc Taskfile.dist.yaml ./
+# Copy package files
+COPY package.json package-lock.json .npmrc ./
 
-# Install root dependencies
-RUN task install -- --frozen-lockfile
+# Install dependencies
+RUN npm ci
 
 # Copy everything else
 COPY . .
 
 # Build
-RUN task build
+RUN npm run build
 
-# Prune dependencies
-RUN task pnpm -- prune --prod
+# Keep only runtime dependencies
+RUN npm prune --production
 
 # Ubuntu is probably the safest choice
 FROM ubuntu:23.04 AS runtime
@@ -78,17 +78,16 @@ COPY --from=runtime-env /env/build/activate /env/activate
 # Set working directory to something other than root
 WORKDIR /app/
 
+# Create app user
+RUN useradd --create-home app
+
 # Setup entrypoint for RUN commands
 COPY ./scripts/shell.sh ./scripts/shell.sh
 SHELL ["./scripts/shell.sh"]
 
-# Create app user
-RUN useradd --create-home app
-
-# Copy static files from build
+# Copy app files from build
 COPY --from=build /build/build/ ./build/
 # Copy dependencies from build
-COPY --from=build /build/.pnpm-store/ ./.pnpm-store/
 COPY --from=build /build/node_modules/ ./node_modules/
 
 # Setup main entrypoint

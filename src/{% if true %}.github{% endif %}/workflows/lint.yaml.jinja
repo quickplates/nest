@@ -24,7 +24,6 @@ jobs:
     env:
       NIX_CACHE_DIR: /home/runner/.nixcache
       TRUNK_CACHE_DIR: /home/runner/.trunkcache
-      PNPM_CACHE_DIR: /home/runner/.pnpmcache
     permissions:
       # Needed to checkout code
       contents: read
@@ -38,27 +37,34 @@ jobs:
           git
           fetch
           origin
-          ${{ github.event.pull_request.base.ref }}
+          {{ '${{ github.event.pull_request.base.ref }}' }}
       - name: Setup Nix cache
         uses: actions/cache@v3.3.1
         id: cache-nix
         with:
-          path: ${{ env.NIX_CACHE_DIR }}
+          path: {{ '${{ env.NIX_CACHE_DIR }}' }}
           key: lint-nix
       - name: Setup Trunk cache
         uses: actions/cache@v3.3.1
         with:
-          path: ${{ env.TRUNK_CACHE_DIR }}
+          path: {{ '${{ env.TRUNK_CACHE_DIR }}' }}
           key: lint-trunk
-      - name: Setup PNPM cache
+      - name: Setup modules cache
         uses: actions/cache@v3.3.1
         with:
-          path: ${{ env.PNPM_CACHE_DIR }}
-          key: lint-pnpm
+          path: node_modules
+          key: lint-modules
+      {%- if docs %}
+      - name: Setup docs modules cache
+        uses: actions/cache@v3.3.1
+        with:
+          path: docs/node_modules
+          key: lint-docs-modules
+      {%- endif %}
       - name: Install Nix
         uses: cachix/install-nix-action@v21
         with:
-          github_access_token: ${{ github.token }}
+          github_access_token: {{ '${{ github.token }}' }}
           install_url: https://releases.nixos.org/nix/nix-2.15.1/install
       # See: https://github.com/cachix/install-nix-action/issues/56
       - name: Import Nix store cache
@@ -66,12 +72,12 @@ jobs:
         run: >
           nix-store
           --import
-          < ${{ env.NIX_CACHE_DIR }}/archive.nar
+          < {{ '${{ env.NIX_CACHE_DIR }}/archive.nar' }}
+      # If running on pull request, compare against base branch
       - name: Trunk Check
         if: github.event_name == 'pull_request'
         env:
-          TRUNK_CACHE: ${{ env.TRUNK_CACHE_DIR }}
-          NPM_CONFIG_STORE_DIR: ${{ env.PNPM_CACHE_DIR }}
+          TRUNK_CACHE: {{ '${{ env.TRUNK_CACHE_DIR }}' }}
         run: >
           nix
           develop
@@ -83,12 +89,12 @@ jobs:
           --
           --ci
           --upstream
-          ${{ github.event.pull_request.base.sha }}
+          {{ '${{ github.event.pull_request.base.sha }}' }}
+      # Else, compare against main branch
       - name: Trunk Check
         if: github.event_name != 'pull_request'
         env:
-          TRUNK_CACHE: ${{ env.TRUNK_CACHE_DIR }}
-          NPM_CONFIG_STORE_DIR: ${{ env.PNPM_CACHE_DIR }}
+          TRUNK_CACHE: {{ '${{ env.TRUNK_CACHE_DIR }}' }}
         run: >
           nix
           develop
@@ -105,8 +111,8 @@ jobs:
         run: >
           mkdir
           -p
-          ${{ env.NIX_CACHE_DIR }}
+          {{ '${{ env.NIX_CACHE_DIR }}' }}
           &&
           nix-store
           --export $(find /nix/store -maxdepth 1 -name '*-*')
-          > ${{ env.NIX_CACHE_DIR }}/archive.nar
+          > {{ '${{ env.NIX_CACHE_DIR }}/archive.nar' }}
