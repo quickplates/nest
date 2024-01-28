@@ -1,33 +1,34 @@
 {
-  "name": "{{ projectname }}",
+  "name": "{{ appname }}",
   "private": true,
   "scripts": {
     "dev": "nest start --debug --watch --preserveWatchOutput",
     "build": "nest build",
-    "clean": "rm --recursive --force build",
-    "update": "ncu --peer --upgrade"
+    "clean": "rm --recursive --force build/",
+    "update": "ncu --peer --doctor --upgrade && npm i --no-audit --no-fund",
+    "test": "npm run build"
   },
   "dependencies": {
-    "@fastify/static": "^6.10.2",
-    "@nanogiants/nestjs-swagger-api-exception-decorator": "^1.6.5",
-    "@nestjs/common": "^10.0.3",
-    "@nestjs/config": "^3.0.0",
-    "@nestjs/core": "^10.0.3",
-    "@nestjs/platform-fastify": "^10.0.3",
-    "@nestjs/swagger": "^7.0.12",
+    "@fastify/static": "^6.12.0",
+    "@nanogiants/nestjs-swagger-api-exception-decorator": "^1.6.11",
+    "@nestjs/common": "^10.3.1",
+    "@nestjs/config": "^3.1.1",
+    "@nestjs/core": "^10.3.1",
+    "@nestjs/platform-fastify": "^10.3.1",
+    "@nestjs/swagger": "^7.2.0",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
-    "reflect-metadata": "^0.1.13",
+    "class-validator": "^0.14.1",
+    "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.0.5",
-    "@nestjs/schematics": "^10.0.1",
-    "@types/node": "^20.3.2",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
-    "eslint-config-prettier": "^8.8.0",
-    "npm-check-updates": "^16.10.13",
-    "typescript": "^5.1.3"
+    "@nestjs/cli": "^10.3.0",
+    "@nestjs/schematics": "^10.1.0",
+    "@types/node": "18.18.2",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint-config-prettier": "^9.1.0",
+    "npm-check-updates": "^16.14.14",
+    "typescript": "^5.3.3"
   }
 }

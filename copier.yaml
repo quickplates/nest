@@ -1,32 +1,46 @@
----
 # Questions
 
-username:
+accountname:
   type: str
-  help: Your GitHub username
+  help: The name of the organization on GitHub
 
-projectname:
+appname:
   type: str
-  help: The name of the project
+  help: The name of the app
+
+description:
+  type: str
+  help: A short description of the app
+
+reponame:
+  type: str
+  help: The name of the repository
+  default: "app-{{ appname }}"
+
+repourl:
+  type: str
+  help: The URL of the repository
+  default: "https://github.com/{{ accountname }}/{{ reponame }}"
 
 envprefix:
   type: str
   help: The prefix for environment variables
-  default: "{{ projectname | upper | replace('-', '_') }}"
+  default: "{{ appname | upper | replace('-', '_') }}"
 
-description:
-  type: str
-  help: A short description of the project
+port:
+  type: int
+  help: The port on which the app will listen
+  default: 3000
 
 docs:
   type: bool
-  help: Whether to include a documentation site for your project
+  help: Whether to include a documentation site for the app
   default: true
 
 docsurl:
   type: str
-  help: The URL of the documentation site for your project
-  default: "https://{{ username }}.github.io/{{ projectname }}"
+  help: The URL of the documentation site for the app
+  default: "https://{{ accountname }}.github.io/{{ reponame }}"
   when: "{{ docs }}"
 
 releases:
@@ -39,6 +53,12 @@ registry:
   help: Whether you want to publish Docker images to a GitHub Container Registry
   default: true
   when: "{{ releases }}"
+
+imagename:
+  type: str
+  help: The name of the Docker image
+  default: "apps/{{ appname }}"
+  when: "{{ registry }}"
 
 # Configuration
 

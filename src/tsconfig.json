@@ -8,15 +8,16 @@
     "isolatedModules": true,
     "module": "commonjs",
     "noUnusedLocals": true,
-    "outDir": "build",
+    "outDir": "build/",
     "preserveWatchOutput": true,
     "removeComments": true,
     "resolveJsonModule": true,
-    "rootDir": "src",
+    "rootDir": "src/",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "target": "es6"
-  }
+  },
+  "include": ["src/"]
 }

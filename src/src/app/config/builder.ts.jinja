@@ -1,0 +1,33 @@
+import { plainToInstance } from "class-transformer";
+import { validateSync } from "class-validator";
+import { Config } from "./config";
+import { ConfigParseError } from "./errors";
+
+/** Builds the config. */
+export class ConfigBuilder {
+  public static build(): Config {
+    const config = {
+      server: {
+        host: process.env.{{ envprefix }}__SERVER__HOST || "0.0.0.0",
+        port:
+          process.env.{{ envprefix }}__SERVER__PORT === undefined
+            ? {{ port }}
+            : parseInt(process.env.{{ envprefix }}__SERVER__PORT, 10),
+      },
+    };
+
+    const validatedConfig = plainToInstance(Config, config, {
+      enableImplicitConversion: true,
+    });
+
+    const errors = validateSync(validatedConfig, {
+      skipMissingProperties: false,
+    });
+
+    if (errors.length > 0) {
+      throw new ConfigParseError();
+    }
+
+    return validatedConfig;
+  }
+}
