@@ -1,5 +1,6 @@
 import { BadRequestException, HttpStatus } from "@nestjs/common";
 
+/** Bad request exception with detailed errors. */
 export class DetailedBadRequestException extends BadRequestException {
   constructor(errors: Record<string, string[]>) {
     super({

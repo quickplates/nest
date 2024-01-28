@@ -1,7 +1,17 @@
 import { Module } from "@nestjs/common";
-import { RootRouteModule } from "./root/module";
+import { RouterModule } from "@nestjs/core";
+import { PingRouteModule } from "./ping/module";
 
+/** Routes module. */
 @Module({
-  imports: [RootRouteModule],
+  imports: [
+    PingRouteModule,
+    RouterModule.register([
+      {
+        path: "/ping",
+        module: PingRouteModule,
+      },
+    ]),
+  ],
 })
 export class RoutesModule {}

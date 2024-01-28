@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
 
     flake-parts = {
@@ -38,9 +38,9 @@
         node = pkgs.nodejs;
         nil = pkgs.nil;
         task = pkgs.go-task;
+        coreutils = pkgs.coreutils;
         trunk = pkgs.trunk-io;
-        # Build copier manually, because the nixpkgs version is outdated
-        copier = pkgs.callPackage ./copier.nix {};
+        copier = pkgs.copier;
         tini = pkgs.tini;
         su-exec = pkgs.su-exec;
       in {
@@ -69,11 +69,13 @@
               node
               nil
               task
+              coreutils
               trunk
               copier
             ];
 
             shellHook = ''
+              export TMPDIR=/tmp
               task install
             '';
           };
@@ -84,10 +86,11 @@
             packages = [
               node
               task
+              coreutils
             ];
 
             shellHook = ''
-              task install
+              export TMPDIR=/tmp
             '';
           };
 
@@ -97,6 +100,10 @@
             packages = [
               node
             ];
+
+            shellHook = ''
+              export TMPDIR=/tmp
+            '';
           };
 
           runtime = pkgs.mkShell {
@@ -107,6 +114,10 @@
               tini
               su-exec
             ];
+
+            shellHook = ''
+              export TMPDIR=/tmp
+            '';
           };
 
           template = pkgs.mkShell {
@@ -114,8 +125,13 @@
 
             packages = [
               task
+              coreutils
               copier
             ];
+
+            shellHook = ''
+              export TMPDIR=/tmp
+            '';
           };
 
           lint = pkgs.mkShell {
@@ -124,11 +140,12 @@
             packages = [
               node
               task
+              coreutils
               trunk
             ];
 
             shellHook = ''
-              task install
+              export TMPDIR=/tmp
             '';
           };
           {%- if docs %}
@@ -139,7 +156,12 @@
             packages = [
               node
               task
+              coreutils
             ];
+
+            shellHook = ''
+              export TMPDIR=/tmp
+            '';
           };
           {%- endif %}
         };

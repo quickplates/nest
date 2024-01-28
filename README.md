@@ -2,7 +2,7 @@
 
 <div align="center">
 
-Nest project template 🐈
+NestJS app template 🐈
 
 [![Lint](https://github.com/quickplates/nest/actions/workflows/lint.yaml/badge.svg)](https://github.com/quickplates/nest/actions/workflows/lint.yaml)
 [![Test](https://github.com/quickplates/nest/actions/workflows/test.yaml/badge.svg)](https://github.com/quickplates/nest/actions/workflows/test.yaml)
@@ -15,9 +15,9 @@ Nest project template 🐈
 ## 💡 About
 
 This repository contains a [`copier`](https://copier.readthedocs.io) template
-for creating [`NestJS`](https://nestjs.com) APIs.
+that can be used to create [`NestJS`](https://nestjs.com) apps.
 
-You can view the example project generated from this template
+You can view the example of project generated from this template
 [**here**](https://github.com/quickplates/nest-example).
 
 ## 📜 Usage
@@ -26,7 +26,7 @@ To create a new project from this template in the current directory,
 make sure you have [`copier`](https://copier.readthedocs.io) installed and run:
 
 ```sh
-copier gh:quickplates/nest .
+copier copy gh:quickplates/nest .
 ```
 
 ## 🚀 Features
@@ -34,15 +34,17 @@ copier gh:quickplates/nest .
 - fully reproducible development environments with
   [`Dev Containers`](https://code.visualstudio.com/docs/remote/containers)
   and [`Nix`](https://nixos.org)
-- package management with [`npm`](https://www.npmjs.com)
-- embracing [`TypeScript`](https://www.typescriptlang.org) to the fullest
-- optimized custom [`Docker`](https://www.docker.com) images
-- automatic releases on [`GitHub Container Registry`](https://ghcr.io)
+- automatic environment activation with [`direnv`](https://direnv.net)
 - running tasks with [`Task`](https://taskfile.dev)
 - formatting and linting with [`Trunk`](https://trunk.io)
+- continuous integration with [`GitHub Actions`](https://github.com/features/actions)
 - easy to write and nice looking documentation
   with [`Docusaurus`](https://docusaurus.io)
-- continuous integration with [`GitHub Actions`](https://github.com/features/actions)
+- optimized custom [`Docker`](https://www.docker.com) images
+- automatic releases on [`GitHub Container Registry`](https://ghcr.io)
+- package management with [`npm`](https://www.npmjs.com)
+- embracing [`TypeScript`](https://www.typescriptlang.org) to the fullest
+- live api documentation with [`Swagger`](https://swagger.io)
 
 ## 💻 Development
 

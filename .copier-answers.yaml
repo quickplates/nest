@@ -1,7 +1,12 @@
----
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: 0.4.0
+_commit: 0.5.2
 _src_path: gh:quickplates/meta
-description: Nest project template 🐈
-templatename: nest
-username: quickplates
+accountname: quickplates
+description: NestJS app template 🐈
+example: true
+exampleaccountname: quickplates
+exampledescription: NestJS app example 🐈
+examplereponame: nest-example
+reponame: nest
+repourl: https://github.com/quickplates/nest
+type: app
