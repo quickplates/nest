@@ -1,5 +1,5 @@
 # Use generic base image with Nix installed
-FROM nixos/nix:2.19.3 AS base-env
+FROM nixos/nix:2.20.5 AS base-env
 
 # Configure Nix
 RUN echo "extra-experimental-features = nix-command flakes" >> /etc/nix/nix.conf
@@ -48,7 +48,7 @@ WORKDIR /build/
 
 # Setup entrypoint for RUN commands
 COPY scripts/shell.sh scripts/shell.sh
-SHELL ["./scripts/shell.sh"]
+SHELL ["/build/scripts/shell.sh"]
 
 # Copy package files
 COPY package.json package-lock.json ./
@@ -82,7 +82,7 @@ RUN useradd --create-home app
 
 # Setup entrypoint for RUN commands
 COPY scripts/shell.sh scripts/shell.sh
-SHELL ["./scripts/shell.sh"]
+SHELL ["/app/scripts/shell.sh"]
 
 # Copy app files from build
 COPY --from=build /build/build/ build/
@@ -91,5 +91,8 @@ COPY --from=build /build/node_modules/ node_modules/
 
 # Setup main entrypoint
 COPY scripts/entrypoint.sh scripts/entrypoint.sh
-ENTRYPOINT ["./scripts/entrypoint.sh", "node", "build/main.js"]
+ENTRYPOINT ["/app/scripts/entrypoint.sh", "node", "build/main.js"]
 CMD []
+
+# Setup ownership
+RUN chown -R app: /app/
