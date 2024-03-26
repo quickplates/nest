@@ -95,4 +95,4 @@ ENTRYPOINT ["/app/scripts/entrypoint.sh", "node", "build/main.js"]
 CMD []
 
 # Setup ownership
-RUN chown -R app: /app/
+RUN chown --recursive app: ./
