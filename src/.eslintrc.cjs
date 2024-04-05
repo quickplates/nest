@@ -14,7 +14,7 @@ module.exports = {
     // Use recommended typescript-eslint rules
     "plugin:@typescript-eslint/recommended",
 
-    // Use recommended docusaurus rules
+    // Turn off rules that might conflict with Prettier
     "prettier",
   ],
 

@@ -102,8 +102,8 @@ tasks:
       - >
         npm
         run
-        update
         --
+        update
         {{ '{{ .CLI_ARGS }}' }}
   test-docs:
     desc: Test docs
@@ -113,8 +113,8 @@ tasks:
       - >
         npm
         run
-        test
         --
+        test
         {{ '{{ .CLI_ARGS }}' }}
   docs:
     desc: Run docusaurus
@@ -125,8 +125,8 @@ tasks:
       - >
         npm
         run
-        docs
         --
+        docs
         {{ '{{ .CLI_ARGS | default "start --host 0.0.0.0" }}' }}
   {%- endif %}
   remove-node-modules:
@@ -178,8 +178,8 @@ tasks:
       - >
         npm
         run
-        update
         --
+        update
         {{ '{{ .CLI_ARGS }}' }}
   clean:
     desc: Clean build outputs
@@ -203,6 +203,8 @@ tasks:
       - flake.lock
       - "*.nix"
       - nest-cli.json
+      - package-lock.json
+      - package.json
       - Taskfile.dist.yaml
       - "{taskfile,Taskfile}.{yaml,yml}"
       - tsconfig.json
@@ -212,8 +214,8 @@ tasks:
       - >
         npm
         run
-        build
         --
+        build
         {{ '{{ .CLI_ARGS }}' }}
   build:
     desc: Build outputs
@@ -228,8 +230,8 @@ tasks:
       - >
         npm
         run
-        dev
         --
+        dev
         {{ '{{ .CLI_ARGS }}' }}
   run:
     desc: Run the app
