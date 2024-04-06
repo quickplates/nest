@@ -88,10 +88,12 @@ SHELL ["/app/scripts/shell.sh"]
 COPY --from=build /build/build/ build/
 # Copy dependencies from build
 COPY --from=build /build/node_modules/ node_modules/
+# Copy package files
+COPY --from=build /build/package.json /build/package-lock.json ./
 
 # Setup main entrypoint
 COPY scripts/entrypoint.sh scripts/entrypoint.sh
-ENTRYPOINT ["/app/scripts/entrypoint.sh", "node", "build/main.js"]
+ENTRYPOINT ["/app/scripts/entrypoint.sh", "npm", "run", "--", "run"]
 CMD []
 
 # Setup ownership
