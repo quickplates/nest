@@ -241,8 +241,10 @@ tasks:
         vars:
           CLI_ARGS: ""
       - >
-        node
-        build/main.js
+        npm
+        run
+        --
+        run
         {{ '{{ .CLI_ARGS }}' }}
   docker:
     desc: Run in docker container
