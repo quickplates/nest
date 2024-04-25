@@ -35,6 +35,9 @@ module.exports = {
   root: true,
 
   rules: {
+    // Allow empty block statements
+    "no-empty": "off",
+
     // Allow empty destructuring patterns
     "no-empty-pattern": "off",
   },
