@@ -69,11 +69,11 @@ jobs:
           --data
           'accountname=quickplates'
           --data
-          'appname=nest-example'
+          'servicename=nest-example'
           --data
           'reponame=nest-example'
           --data
-          'description=NestJS app example 🐈'
+          'description=NestJS service example 🐈'
       # Create archive to retain file permissions
       - name: Create archive
         run: >

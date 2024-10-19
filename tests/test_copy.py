@@ -10,8 +10,8 @@ def data() -> dict[str, str]:
 
     return {
         "accountname": "foo",
-        "appname": "foo",
-        "description": "Example app",
+        "servicename": "foo",
+        "description": "Example service",
     }
 
 

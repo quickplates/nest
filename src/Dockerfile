@@ -75,16 +75,16 @@ COPY --from=runtime-env /env/build/closure/ /nix/store/
 COPY --from=runtime-env /env/build/activate /env/activate
 
 # Set working directory to something other than root
-WORKDIR /app/
+WORKDIR /service/
 
-# Create app user
-RUN useradd --create-home app
+# Create service user
+RUN useradd --create-home service
 
 # Setup entrypoint for RUN commands
 COPY scripts/shell.sh scripts/shell.sh
-SHELL ["/app/scripts/shell.sh"]
+SHELL ["/service/scripts/shell.sh"]
 
-# Copy app files from build
+# Copy service files from build
 COPY --from=build /build/build/ build/
 # Copy dependencies from build
 COPY --from=build /build/node_modules/ node_modules/
@@ -93,8 +93,8 @@ COPY --from=build /build/package.json /build/package-lock.json ./
 
 # Setup main entrypoint
 COPY scripts/entrypoint.sh scripts/entrypoint.sh
-ENTRYPOINT ["/app/scripts/entrypoint.sh", "npm", "run", "--", "run"]
+ENTRYPOINT ["/service/scripts/entrypoint.sh", "npm", "run", "--", "run"]
 CMD []
 
 # Setup ownership
-RUN chown --recursive app: ./
+RUN chown --recursive service: ./

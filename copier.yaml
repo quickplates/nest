@@ -4,18 +4,18 @@ accountname:
   type: str
   help: The name of the organization on GitHub
 
-appname:
+servicename:
   type: str
-  help: The name of the app
+  help: The name of the service
 
 description:
   type: str
-  help: A short description of the app
+  help: A short description of the service
 
 reponame:
   type: str
   help: The name of the repository
-  default: "app-{{ appname }}"
+  default: "{{ servicename }}"
 
 repourl:
   type: str
@@ -25,21 +25,21 @@ repourl:
 envprefix:
   type: str
   help: The prefix for environment variables
-  default: "{{ appname | upper | replace('-', '_') }}"
+  default: "{{ servicename | upper | replace('-', '_') }}"
 
 port:
   type: int
-  help: The port on which the app will listen
+  help: The port on which the service will listen
   default: 3000
 
 docs:
   type: bool
-  help: Whether to include a documentation site for the app
+  help: Whether to include a documentation site for the service
   default: true
 
 docsurl:
   type: str
-  help: The URL of the documentation site for the app
+  help: The URL of the documentation site for the service
   default: "https://{{ accountname }}.github.io/{{ reponame }}"
   when: "{{ docs }}"
 
@@ -57,7 +57,7 @@ registry:
 imagename:
   type: str
   help: The name of the Docker image
-  default: "apps/{{ appname }}"
+  default: "services/{{ servicename }}"
   when: "{{ registry }}"
 
 # Configuration
