@@ -2,7 +2,7 @@
 
 <div align="center">
 
-NestJS app template 🐈
+NestJS service template 🐈
 
 [![Lint](https://github.com/quickplates/nest/actions/workflows/lint.yaml/badge.svg)](https://github.com/quickplates/nest/actions/workflows/lint.yaml)
 [![Test](https://github.com/quickplates/nest/actions/workflows/test.yaml/badge.svg)](https://github.com/quickplates/nest/actions/workflows/test.yaml)
@@ -15,7 +15,7 @@ NestJS app template 🐈
 ## 💡 About
 
 This repository contains a [`copier`](https://copier.readthedocs.io) template
-that can be used to create [`NestJS`](https://nestjs.com) apps.
+that can be used to create [`NestJS`](https://nestjs.com) services.
 
 You can view the example of project generated from this template
 [**here**](https://github.com/quickplates/nest-example).

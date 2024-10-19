@@ -19,7 +19,7 @@ export class ServerConfig {
   port: number;
 }
 
-/** Configuration for the application. */
+/** Configuration for the service. */
 export class Config {
   @ValidateNested()
   server: ServerConfig;
