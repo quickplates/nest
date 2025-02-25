@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+
 import { PingRouteController } from "./controller";
 import { PingRouteService } from "./service";
 
