@@ -6,4 +6,4 @@ async function run() {
   await app.run();
 }
 
-run();
+void run();

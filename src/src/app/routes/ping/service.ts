@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+
 import { PingResponse } from "./models";
 
 /** Service for the ping endpoint. */

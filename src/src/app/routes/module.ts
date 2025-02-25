@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { RouterModule } from "@nestjs/core";
+
 import { PingRouteModule } from "./ping/module";
 
 /** Routes module. */
@@ -8,8 +9,8 @@ import { PingRouteModule } from "./ping/module";
     PingRouteModule,
     RouterModule.register([
       {
-        path: "/ping",
         module: PingRouteModule,
+        path: "/ping",
       },
     ]),
   ],

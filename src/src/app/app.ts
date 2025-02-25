@@ -1,5 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
+
 import { Config } from "./config/config";
 import { ConfigService } from "./config/service";
 

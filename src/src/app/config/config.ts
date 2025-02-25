@@ -9,13 +9,13 @@ import {
 
 /** Configuration for the server. */
 export class ServerConfig {
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   host: string;
 
   @IsNumber()
-  @Min(1)
   @Max(65535)
+  @Min(1)
   port: number;
 }
 

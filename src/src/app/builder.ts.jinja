@@ -9,16 +9,26 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+
 import { App } from "./app";
 import { DetailedBadRequestException } from "./exceptions";
 import { AppModule } from "./module";
 
 /** Builds the app. */
 export class AppBuilder {
+  public async build(): Promise<App> {
+    const app = await this.buildNestApp();
+
+    this.configurePipes(app);
+    this.configureSwagger(app);
+
+    return new App(app);
+  }
+
   private buildAdapter(): FastifyAdapter {
     return new FastifyAdapter({
-      ignoreTrailingSlash: true,
       ignoreDuplicateSlashes: true,
+      ignoreTrailingSlash: true,
     });
   }
 
@@ -30,22 +40,19 @@ export class AppBuilder {
 
   private buildValidationPipe(): ValidationPipe {
     const mapErrors = (errors: ValidationError[]) => {
-      return errors.reduce(
-        (acc, error) => {
-          for (const child of error.children ?? []) {
-            if (child.constraints) {
-              if (!(child.property in acc)) {
-                acc[child.property] = [];
-              }
-
-              acc[child.property].push(...Object.values(child.constraints));
+      return errors.reduce<{ [key: string]: string[] }>((acc, error) => {
+        for (const child of error.children ?? []) {
+          if (child.constraints) {
+            if (!(child.property in acc)) {
+              acc[child.property] = [];
             }
-          }
 
-          return acc;
-        },
-        {} as Record<string, string[]>,
-      );
+            acc[child.property].push(...Object.values(child.constraints));
+          }
+        }
+
+        return acc;
+      }, {});
     };
 
     const options: ValidationPipeOptions = {
@@ -83,14 +90,5 @@ export class AppBuilder {
     );
 
     SwaggerModule.setup("schema", app, swaggerDocument);
-  }
-
-  public async build(): Promise<App> {
-    const app = await this.buildNestApp();
-
-    this.configurePipes(app);
-    this.configureSwagger(app);
-
-    return new App(app);
   }
 }
